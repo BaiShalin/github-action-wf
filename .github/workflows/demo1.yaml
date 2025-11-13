@@ -1,0 +1,35 @@
+name: Python CI
+
+# ✅ 触发条件：当代码 push 到 main 分支，或者有人提交 Pull Request 到 main 分支时运行
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    # ✅ 使用 GitHub 提供的 Ubuntu 虚拟机
+    runs-on: ubuntu-latest
+
+    steps:
+      # ✅ 第一步：检出代码（从 GitHub 拉下来）
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      # ✅ 第二步：设置 Python 环境（这里使用 Python 3.10）
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'  # 你可以改成 3.9, 3.11 等
+
+      # ✅ 第三步：安装项目依赖（比如 pytest）
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # ✅ 第四步：运行测试（比如用 pytest）
+      - name: Run tests
+        run: |
+          pytest tests/  # 假设你用 pytest 写了单元测试，放在 tests/ 目录下
