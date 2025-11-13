@@ -32,4 +32,4 @@ jobs:
       # ✅ 第四步：运行测试（比如用 pytest）
       - name: Run tests
         run: |
-          pytest tests/  # 假设你用 pytest 写了单元测试，放在 tests/ 目录下
+          . pytest tests/  # 假设你用 pytest 写了单元测试，放在 tests/ 目录下
